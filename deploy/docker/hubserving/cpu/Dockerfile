@@ -25,6 +25,11 @@ RUN tar xf /PaddleOCR/inference/ch_ppocr_mobile_v2.0_cls_infer.tar -C /PaddleOCR
 ADD https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_server_v2.0_rec_infer.tar /PaddleOCR/inference/
 RUN tar xf /PaddleOCR/inference/ch_ppocr_server_v2.0_rec_infer.tar -C /PaddleOCR/inference/
 
+RUN hub install deploy/hubserving/ocr_system/
+RUN hub install deploy/hubserving/ocr_cls/
+RUN hub install deploy/hubserving/ocr_det/
+RUN hub install deploy/hubserving/ocr_rec/
+
 EXPOSE 8868
 
-CMD ["/bin/bash","-c","hub install deploy/hubserving/ocr_system/ && hub serving start -m ocr_system"]
+CMD ["/bin/bash","-c","hub install deploy/hubserving/ocr_system/ && hub serving start -m ocr_system -p 8868"]
